@@ -94,11 +94,11 @@ async function timingSafeFind(keys: string[], candidate: string): Promise<boolea
  */
 async function timingSafeEqual(a: string, b: string): Promise<boolean> {
 	const encoder = new TextEncoder();
-	const key = await crypto.subtle.generateKey(
+	const key = (await crypto.subtle.generateKey(
 		{ name: "HMAC", hash: "SHA-256" },
 		false,
 		["sign"],
-	);
+	)) as CryptoKey;
 	const [macA, macB] = await Promise.all([
 		crypto.subtle.sign("HMAC", key, encoder.encode(a)),
 		crypto.subtle.sign("HMAC", key, encoder.encode(b)),
