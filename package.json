@@ -1,0 +1,84 @@
+{
+	"name": "hono-auth-guard",
+	"version": "0.1.0",
+	"description": "Lightweight, type-safe auth middleware for Cloudflare Workers + Hono. JWT, API Key, and OAuth guards with zero runtime dependencies.",
+	"type": "module",
+	"license": "MIT",
+	"author": "ikeno-web",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ikeno-web/hono-auth-guard.git"
+	},
+	"keywords": [
+		"hono",
+		"cloudflare-workers",
+		"auth",
+		"jwt",
+		"api-key",
+		"middleware",
+		"guard",
+		"oauth",
+		"typescript",
+		"web-crypto"
+	],
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		},
+		"./jwt": {
+			"types": "./dist/jwt.d.ts",
+			"import": "./dist/jwt.mjs",
+			"require": "./dist/jwt.js"
+		},
+		"./api-key": {
+			"types": "./dist/api-key.d.ts",
+			"import": "./dist/api-key.mjs",
+			"require": "./dist/api-key.js"
+		},
+		"./oauth": {
+			"types": "./dist/oauth.d.ts",
+			"import": "./dist/oauth.mjs",
+			"require": "./dist/oauth.js"
+		},
+		"./testing": {
+			"types": "./dist/testing.d.ts",
+			"import": "./dist/testing.mjs",
+			"require": "./dist/testing.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
+	"scripts": {
+		"dev": "tsup --watch",
+		"build": "tsup",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:cov": "vitest run --coverage",
+		"size": "tsup && node -e \"const{gzipSync}=require('zlib');const{readFileSync}=require('fs');const b=gzipSync(readFileSync('dist/index.mjs'));console.log('gzip size:',b.length,'bytes');if(b.length>10240){process.exit(1)}\""
+	},
+	"peerDependencies": {
+		"hono": "^4.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.0",
+		"@cloudflare/vitest-pool-workers": "^0.5.0",
+		"@cloudflare/workers-types": "^4.20260627.1",
+		"@vitest/coverage-v8": "^2.1.9",
+		"hono": "^4.0.0",
+		"tsup": "^8.0.0",
+		"typescript": "^5.4.0",
+		"vitest": "^2.0.0"
+	}
+}
