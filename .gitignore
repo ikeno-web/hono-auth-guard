@@ -24,3 +24,8 @@ Thumbs.db
 # Misc
 *.tsbuildinfo
 *.log
+
+# Internal workflow artifacts
+_meta/
+_design/
+_review/
